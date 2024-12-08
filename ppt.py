@@ -1,46 +1,33 @@
 import random
 
-def determinar_ganador(jugador, sistema):
-    # Reglas del juego
+# Opciones disponibles
+opciones = ["piedra", "papel", "tijera"]
+
+print("¡Bienvenido al juego de Piedra, Papel o Tijera!")
+while True:
+    # Entrada del jugador
+    jugador = input("\nElige piedra, papel o tijera (o 'salir' para terminar): ").lower()
+
+    # Salir del juego
+    if jugador == "salir":
+        print("¡Gracias por jugar! Hasta luego.")
+        break
+
+    # Validar entrada
+    if jugador not in opciones:
+        print("Opción no válida. Intenta de nuevo.")
+        continue
+
+    # Elección del sistema
+    sistema = random.choice(opciones)
+    print(f"El sistema eligió: {sistema}")
+
+    # Determinar resultado
     if jugador == sistema:
-        return "Empate"
+        print("¡Es un empate!")
     elif (jugador == "piedra" and sistema == "tijera") or \
          (jugador == "papel" and sistema == "piedra") or \
          (jugador == "tijera" and sistema == "papel"):
-        return "¡Ganaste!"
+        print("¡Ganaste!")
     else:
-        return "Perdiste"
-
-def juego():
-    # Opciones disponibles
-    opciones = ["piedra", "papel", "tijera"]
-
-    print("¡Bienvenido a Piedra, Papel o Tijera!")
-    while True:
-        # Entrada del jugador
-        jugador = input("Elige piedra, papel o tijera: ").lower()
-        if jugador not in opciones:
-            print("Opción inválida. Intenta de nuevo.")
-            continue
-
-        # Elección del sistema
-        sistema = random.choice(opciones)
-        print(f"El sistema eligió: {sistema}")
-
-        # Determinar ganador
-        resultado = determinar_ganador(jugador, sistema)
-        print(f"Resultado: {resultado}")
-
-        # Preguntar si quiere seguir jugando
-        while True:
-            jugar_de_nuevo = input("¿Quieres jugar otra vez? (sí/no): ").strip().lower()
-            if jugar_de_nuevo == "sí":
-                break
-            elif jugar_de_nuevo == "no":
-                print("¡Gracias por jugar!")
-                return  # Sale de la función, terminando el juego
-            else:
-                print("Por favor, responde 'sí' o 'no'.")
-
-# Iniciar el juego
-juego()
+        print("¡Perdiste!")
